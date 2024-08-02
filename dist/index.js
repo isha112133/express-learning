@@ -25,10 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
         command.textContent = lastCommand;
         command.className = "command";
         commandsContainer.appendChild(command);
-        textarea.value = "";
+        textarea.value += "\n";
       }
     });
-
     toggleBtn.addEventListener("click", function () {
       collapseScreen.classList.add("open");
       toggleBtn.style.display = "none";
