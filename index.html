@@ -26,7 +26,7 @@
     #collapse-screen {
       position: fixed;
       top: 0;
-      left: -25%; /* Hidden initially */
+      left: -25%;
       width: 25%;
       height: 100vh;
       background-color: #f8f9fa;
@@ -36,10 +36,11 @@
       transition: left 0.5s ease;
     }
     #collapse-screen.open {
-      left: 0; /* Visible when open */
+      left: 0;
     }
     #commands {
       padding: 20px;
+      margin-top: 20px;
     }
     .command {
       margin-bottom: 10px;
@@ -60,7 +61,7 @@
       outline: none;
     }
     .textarea-container {
-      margin-top: 50%;
+      margin-top: 10%;
       display: flex;
       flex-direction: column;
       align-items: start;
@@ -75,9 +76,43 @@
       font-size: 1.25rem;
       color: #343a40;
     }
+    .toggle-btn,
+    .close-btn {
+      position: fixed;
+      top: 10px;
+      z-index: 1100;
+      padding: 10px;
+      background-color: transparent;
+      border-radius: 50px;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .toggle-btn {
+      left: 10px;
+    }
+    .close-btn {
+      left: 10px;
+      display: none;
+    }
+    .toggle-btn img,
+    .close-btn img {
+      width: 20px;
+      height: 20px;
+    }
   </style>
 </head>
 <body>
+  <div>
+    <button class="toggle-btn" id="toggle-btn">
+      <img src="right-chevron.png" alt="Open" />
+    </button>
+    <button class="close-btn" id="close-btn">
+      <img src="left-chevron.png" alt="Close" />
+    </button>
+  </div>
   <div id="collapse-screen">
     <div id="commands">
       <p>Your commands are here.</p>
