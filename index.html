@@ -1,134 +1,180 @@
 <!DOCTYPE html>
-<script src="./dist/index.js"></script>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Command Input</title>
-  <style>
-    body {
-      margin: 0;
-      max-width: 100%;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: start;
-      align-items: start;
-      height: 100vh;
-      background-color: white;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 80vh;
-      width: 100%;
-      max-width: 600px;
-    }
-    #collapse-screen {
-      position: fixed;
-      top: 0;
-      left: -25%;
-      width: 25%;
-      height: 100vh;
-      background-color: #f8f9fa;
-      border-right: 2px solid #007bff;
-      z-index: 1000;
-      overflow: hidden;
-      transition: left 0.5s ease;
-    }
-    #collapse-screen.open {
-      left: 0;
-    }
-    #commands {
-      padding: 20px;
-      margin-top: 20px;
-    }
-    .command {
-      margin-bottom: 10px;
-      font-family: "Courier New", Courier, monospace;
-    }
-    .custom-textarea {
-      border: 1px solid #007bff;
-      border-left: 0px;
-      border-right: 0px;
-      border-top: 0px;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .custom-textarea:focus {
-      border-color: none;
-      box-shadow: none;
-      outline: none;
-    }
-    .textarea-container {
-      margin-top: 10%;
-      display: flex;
-      flex-direction: column;
-      align-items: start;
-      margin-left: 40%;
-      justify-content: center;
-      min-height: 100vh;
-      background-color: white;
-    }
-    .textarea-label {
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      font-size: 1.25rem;
-      color: #343a40;
-    }
-    .toggle-btn,
-    .close-btn {
-      position: fixed;
-      top: 10px;
-      z-index: 1100;
-      padding: 10px;
-      background-color: transparent;
-      border-radius: 50px;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: opacity 0.3s ease;
-    }
-    .toggle-btn {
-      left: 10px;
-    }
-    .close-btn {
-      left: 10px;
-      display: none;
-    }
-    .toggle-btn img,
-    .close-btn img {
-      width: 20px;
-      height: 20px;
-    }
-  </style>
-</head>
-<body>
-  <div>
-    <button class="toggle-btn" id="toggle-btn">
-      <img src="right-chevron.png" alt="Open" />
-    </button>
-    <button class="close-btn" id="close-btn">
-      <img src="left-chevron.png" alt="Close" />
-    </button>
-  </div>
-  <div id="collapse-screen">
-    <div id="commands">
-      <p>Your commands are here.</p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Command Input</title>
+    <style>
+      body {
+        margin: 0;
+        max-width: 100%;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        height: 100vh;
+        background-color: white;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 80vh;
+        width: 100%;
+        max-width: 600px;
+      }
+      #collapse-screen {
+        position: fixed;
+        top: 0;
+        left: -25%;
+        width: 25%;
+        height: 100vh;
+        background-color: #f8f9fa;
+        border-right: 2px solid #007bff;
+        z-index: 1000;
+        overflow: hidden;
+        transition: left 0.5s ease;
+      }
+      #collapse-screen.open {
+        left: 0;
+      }
+      #commands {
+        padding: 20px;
+        margin-top: 20px;
+      }
+      .command {
+        margin-bottom: 10px;
+        font-family: "Courier New", Courier, monospace;
+      }
+      .custom-textarea {
+        border: 1px solid #007bff;
+        border-left: 0px;
+        border-right: 0px;
+        border-top: 0px;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .custom-textarea:focus {
+        border-color: none;
+        box-shadow: none;
+        outline: none;
+      }
+      .textarea-container {
+        margin-top: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        margin-left: 40%;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: white;
+      }
+      .textarea-label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        font-size: 1.25rem;
+        color: #343a40;
+      }
+      .toggle-btn,
+      .close-btn {
+        position: fixed;
+        top: 10px;
+        z-index: 1100;
+        padding: 10px;
+        background-color: transparent;
+        border-radius: 50px;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+      .toggle-btn {
+        left: 10px;
+      }
+      .close-btn {
+        left: 10px;
+        display: none;
+      }
+      .toggle-btn img,
+      .close-btn img {
+        width: 20px;
+        height: 20px;
+      }
+      .dropbtn {
+        background-color: rgb(39, 39, 41);
+        color: white;
+        margin-left: 40px;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+      }
+      .dropdown {
+        position: absolute;
+        display: inline-block;
+      }
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: rgb(39, 39, 41);
+        min-width: 160px;
+        z-index: 1;
+      }
+      .dropdown-content a {
+        color: white;
+        padding: 12px 16px;
+        display: block;
+      }
+      .show {
+        display: block;
+      }
+      #draggable-menu {
+        position: absolute; /* Make sure this is set to absolute */
+        top: 10px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="position: relative">
+      <div>
+        <button class="toggle-btn" id="toggle-btn">
+          <img src="right-chevron.png" alt="Open" />
+        </button>
+        <button class="close-btn" id="close-btn">
+          <img src="left-chevron.png" alt="Close" />
+        </button>
+      </div>
+      <div id="collapse-screen">
+        <div id="commands">
+          <p>Your commands are here.</p>
+        </div>
+      </div>
+      <div class="container textarea-container">
+        <label for="input-command" class="textarea-label"
+          >Write your commands here</label
+        >
+        <textarea
+          id="input-command"
+          class="form-control custom-textarea"
+          placeholder="Enter your command here...."
+          rows="5"
+          autofocus
+        ></textarea>
+      </div>
+      <div id="draggable-menu">
+        <div class="dropdown">
+          <button class="dropbtn">Menu</button>
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="container textarea-container">
-    <label for="input-command" class="textarea-label"
-      >Write your commands here</label
-    >
-    <textarea
-      id="input-command"
-      class="form-control custom-textarea"
-      placeholder="Enter your command here...."
-      rows="5"
-      autofocus
-    ></textarea>
-  </div>
-  <!-- <script src="index.ts"></script> -->
-</body>
+
+    <script src="./dist/index.js"></script>
+  </body>
+</html>
