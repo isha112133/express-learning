@@ -81,3 +81,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const dropdownButton = document.querySelector(".menu-icon");
+  const dropdownContent = document.querySelector(".dropdown-content1");
+  const draggableMenu = document.getElementById("draggable-menu1");
+  let isDragging = false;
+  let startX, startY, offsetX, offsetY;
+
+  if (dropdownButton && dropdownContent && draggableMenu) {
+    dropdownButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dropdownContent.classList.toggle("show");
+    });
+
+    draggableMenu.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX;
+      startY = e.clientY;
+      offsetX = draggableMenu.offsetLeft;
+      offsetY = draggableMenu.offsetTop;
+      e.preventDefault();
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        draggableMenu.style.left = `${offsetX + dx}px`;
+        draggableMenu.style.top = `${offsetY + dy}px`;
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+  }
+});

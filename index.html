@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Command Input</title>
+    <!-- <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       body {
         margin: 0;
@@ -121,23 +132,89 @@
         min-width: 160px;
         z-index: 1;
       }
+      .dropdown1 {
+        position: absolute;
+        display: inline-block;
+      }
+      .dropdown-content1 {
+        display: none;
+        position: absolute;
+        background-color: rgb(255, 255, 255);
+        /* min-width: 260px; */
+        z-index: 1;
+        border-radius: 2px;
+        border: #343a40;
+        border-width: 0.1px;
+        border-color: #343a40;
+        /* border-style: solid; */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .dropdown-content1 a {
+        color: rgb(29, 28, 28);
+        padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+      }
       .dropdown-content a {
         color: white;
         padding: 12px 16px;
+        display: block;
+        text-decoration: none;
+      }
+      .dropdown-content a:hover {
+        background-color: rgb(70, 70, 72);
+        color: #ffb715;
+        border-radius: 4px;
+        transform: scale(1.05);
+      }
+
+      .dropdown:hover .dropdown-content {
         display: block;
       }
       .show {
         display: block;
       }
       #draggable-menu {
-        position: absolute; /* Make sure this is set to absolute */
+        position: absolute;
         top: 10px;
         left: 10px;
+      }
+      #draggable-menu1 {
+        position: absolute;
+        top: 10px;
+        left: 100px;
+      }
+      .dropdown-content1 span {
+        font-size: 14px;
+        color: #000;
+        background-color: rgb(248, 245, 245);
+        transition: all 0.3s ease;
+      }
+
+      .dropdown-content1 span:hover {
+        font-size: 18px;
+        color: #fff;
+        background-color: #333;
+      }
+      .menu-icon {
+        background-color: rgb(255, 255, 255);
+        color: rgb(29, 28, 28);
+        margin-left: 200px;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 2px;
+        border: #343a40;
+        border-width: 0.2px;
+        border-color: #343a40;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
   <body>
     <div style="position: relative">
+      <!-- collapsing screen -->
       <div>
         <button class="toggle-btn" id="toggle-btn">
           <img src="right-chevron.png" alt="Open" />
@@ -163,13 +240,70 @@
           autofocus
         ></textarea>
       </div>
+      <!-- draggable menu 1st design -->
       <div id="draggable-menu">
         <div class="dropdown">
-          <button class="dropbtn">Menu</button>
+          <button style="display: flex; gap: 10px" class="dropbtn">
+            <i
+              style="
+                display: inline-block;
+                transition: transform 0.3s ease;
+                transform: rotate(90deg);
+              "
+              class="fa-solid fa-ellipsis"
+            ></i
+            >Menu
+          </button>
           <div class="dropdown-content">
             <a href="#">Link 1</a>
             <a href="#">Link 2</a>
             <a href="#">Link 3</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- draggable menu 2nd design -->
+      <div id="draggable-menu1">
+        <div class="dropdown1">
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              width: 90%;
+              justify-content: space-between;
+            "
+            class="menu-icon"
+          >
+            Menu<i class="fa-solid fa-bars"></i>
+          </div>
+          <div
+            class="dropdown-content1"
+            style="margin-left: 70%; width: 100%; margin-top: 10px"
+          >
+            <span
+              ><a href="#"
+                ><i style="padding-right: 12px" class="fa-solid fa-house"></i>
+                Home</a
+              ></span
+            ><span
+              ><a href="#"
+                ><i style="padding-right: 12px" class="fa-solid fa-user"></i>
+                User</a
+              ></span
+            ><span
+              ><a href="#"
+                ><i
+                  style="padding-right: 12px"
+                  class="fa-solid fa-right-from-bracket"
+                ></i>
+                Logout</a
+              ></span
+            ><span
+              ><a href="#"
+                ><i style="padding-right: 12px" class="fa-solid fa-gear"></i>
+                Settings</a
+              ></span
+            >
           </div>
         </div>
       </div>
