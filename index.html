@@ -210,12 +210,181 @@
         border-color: #343a40;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
+      #draggable-menu2 {
+        position: absolute;
+        top: 10px;
+        left: 100px;
+        width: 200px; /* Adjust as needed for your content */
+      }
+
+      .dropdown2 {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content2 {
+        display: none;
+        position: absolute;
+        background-color: #343a40;
+        z-index: 1;
+        color: rgb(206, 204, 204);
+        border-radius: 14px;
+        box-shadow: 10px 12px 8px rgba(162, 161, 161, 0.1);
+        width: 35%;
+        margin-top: 10px;
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .dropdown-content2.show {
+        display: block;
+        animation: slideDown 0.5s forwards;
+      }
+
+      @keyframes slideDown {
+        0% {
+          opacity: 0;
+          transform: scaleY(0.5) translateY(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: scaleY(1) translateY(0);
+        }
+      }
+
+      .dropdown-content2.hide {
+        animation: slideUp 0.5s forwards;
+      }
+
+      @keyframes slideUp {
+        0% {
+          opacity: 1;
+          transform: scaleY(1) translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: scaleY(0.5) translateY(-20px);
+        }
+      }
+
+      .dropdown-content2 div a {
+        display: flex;
+        gap: 6px;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        background-color: #343a40;
+        padding: 12px 16px;
+        color: rgb(206, 204, 204);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .dropdown-content2 div a:hover {
+        background-color: #e5e4e4;
+        color: #282828;
+      }
+
+      .menu-bar {
+        background-color: #343a40;
+        color: rgb(206, 204, 204);
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .select-menu {
+        width: 310px;
+        margin: 150px auto;
+        position: absolute;
+      }
+      .select-menu .select-btn {
+        position: relative;
+        top: -140px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: #3b3737;
+        background-color: #e5e0e0;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .select-btn .icon-search {
+        font-size: 25px;
+        transition: 1s;
+      }
+      .select-btn.active .icon-search {
+        transform: rotate(360deg);
+      }
+      .select-menu .list {
+        position: absolute;
+        width: 270px;
+        transform: translateY(-140px) translateX(-40px);
+
+        margin-top: 10px;
+      }
+      .list .option {
+        display: flex;
+        align-items: center;
+        width: 280px;
+        height: 55px;
+        color: #3b3737;
+        background-color: #e5e0e0;
+        padding: 0 16px;
+        cursor: pointer;
+        transform-origin: top;
+        transform: scale(0) translateY(-65px);
+        margin-bottom: -55px;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out,
+          margin-bottom 0.5s ease-in-out;
+        transition-delay: calc(0.1s * var(--i));
+      }
+      .select-btn.active ~ .list .option {
+        transition: opacity 1s ease-in-out, transform 0.5s ease-in-out,
+          margin-bottom 0.2s ease-in-out;
+        transition-delay: calc(0.1s * var(--i));
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        margin-bottom: 0;
+      }
+      .list .option:hover {
+        background: #f2f2f2;
+      }
+      .list .option:nth-child(1) {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      .list .option:nth-child(5) {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+      .option .icon {
+        font-size: 25px;
+        margin-right: 12px;
+      }
+      .option .option-text {
+        font-size: 18px;
+        color: #333;
+      }
     </style>
   </head>
   <body>
     <div style="position: relative">
       <!-- collapsing screen -->
-      <div>
+      <!-- <div>
         <button class="toggle-btn" id="toggle-btn">
           <img src="right-chevron.png" alt="Open" />
         </button>
@@ -239,9 +408,9 @@
           rows="5"
           autofocus
         ></textarea>
-      </div>
+      </div> -->
       <!-- draggable menu 1st design -->
-      <div id="draggable-menu">
+      <!-- <div id="draggable-menu">
         <div class="dropdown">
           <button style="display: flex; gap: 10px" class="dropbtn">
             <i
@@ -260,7 +429,7 @@
             <a href="#">Link 3</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- draggable menu 2nd design -->
       <div id="draggable-menu1">
@@ -307,8 +476,99 @@
           </div>
         </div>
       </div>
-    </div>
 
+      <!-- draggable menu 3rd design -->
+      <div id="draggable-menu2">
+        <div class="dropdown2">
+          <div class="menu-bar"><i class="fa-solid fa-bars"></i> Menu</div>
+        </div>
+
+        <div class="dropdown-content2">
+          <div>
+            <a
+              style="
+                border-top-left-radius: 14px;
+                border-top-right-radius: 14px;
+              "
+              href="#"
+              ><i class="fa-solid fa-house"></i> Home</a
+            >
+          </div>
+          <div>
+            <a href="#"><i class="fa-solid fa-user"></i> User</a>
+          </div>
+          <div>
+            <a href="#"
+              ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+            >
+          </div>
+          <div>
+            <a
+              href="#"
+              style="
+                border-bottom-left-radius: 14px;
+                border-bottom-right-radius: 14px;
+              "
+              ><i class="fa-solid fa-gear"></i> Settings</a
+            >
+          </div>
+        </div>
+      </div>
+      <!-- draggable menu 4th design -->
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 800px;
+          margin-top: 180px;
+          /* min-height: 100vh;
+          min-width: 100vh; */
+          /* background: linear-gradient(45deg, #8460ed, #ff1252); */
+        "
+      >
+        <div class="select-menu" id="draggableMenu">
+          <div
+            style="display: flex; gap: 5px; align-items: center"
+            class="select-btn"
+            id="select-btn"
+          >
+            <span id="text">Menu</span>
+            <ion-icon class="icon-search" name="menu-outline"></ion-icon>
+          </div>
+          <ul class="list">
+            <li class="option" style="--i: 5">
+              <ion-icon name="home-outline" class="icon"></ion-icon>
+              <span class="option-text">Home</span>
+            </li>
+            <li class="option" style="--i: 4">
+              <ion-icon name="print-outline" class="icon"></ion-icon>
+              <span class="option-text">Print</span>
+            </li>
+            <li class="option" style="--i: 3">
+              <ion-icon name="cart-outline" class="icon"></ion-icon>
+              <span class="option-text">Cart</span>
+            </li>
+            <li class="option" style="--i: 2">
+              <ion-icon name="information-outline" class="icon"></ion-icon>
+              <span class="option-text">Info</span>
+            </li>
+            <li class="option" style="--i: 1">
+              <ion-icon name="settings-outline" class="icon"></ion-icon>
+              <span class="option-text">Settings</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
     <script src="./dist/index.js"></script>
   </body>
 </html>
