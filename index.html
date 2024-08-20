@@ -379,6 +379,133 @@
         font-size: 18px;
         color: #333;
       }
+      /* 5th draggable button */
+      .menu {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: grab;
+      }
+      .menu li {
+        position: absolute;
+        list-style: none;
+        left: 0;
+        transform-origin: 100px;
+        transition: 0.5s;
+        transition-delay: calc(0.1s * var(--i));
+        transform: rotate(0deg) translateX(80px);
+      }
+      .menu.active li {
+        transform: rotate(calc(360deg / 8 * var(--i)));
+      }
+      .menu li a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+        background-color: #ffffff;
+        border-radius: 50%;
+        transform: rotate(calc(360deg / -8 * var(--i)));
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+        font-size: 1.2em;
+        transition: 0.5s;
+      }
+      .menu li a:hover {
+        color: #007bff;
+      }
+      .toggle {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+        font-size: 2em;
+        transition: transform 1.25s;
+      }
+      .menu.active .toggle {
+        transform: rotate(315deg);
+      }
+      /* 6th draggable */
+      .bottom-navbar {
+        position: absolute; /* Changed from relative to absolute */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 330px;
+        height: 60px;
+        background-color: #fff;
+        padding: 0 20px;
+        border-radius: 30px 30px 10px 10px;
+        cursor: grab;
+      }
+      .bottom-top {
+        content: "";
+        background-color: #ffffff;
+        height: 65px;
+        width: 65px;
+        z-index: 12;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -50px;
+      }
+      .plus-wrapper {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: liner-gradient(to-left, rgb(208, 208, 216));
+        box-shadow: 2px 4px 12px 3px rgb(234, 209, 155);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .plus-wrapper:hover {
+        margin-top: -10px;
+        z-index: 59;
+        box-shadow: none;
+        transform: scale(1.1);
+        box-shadow: 2px 4px 12px 3px rgb(234, 209, 155);
+      }
+      .bottom-navbar i {
+        cursor: pointer;
+      }
+      .icon-handle {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .icon-handle .icon {
+        border-radius: 66px;
+        padding: 8px;
+        box-shadow: 2px 2px 20px 2px rgb(172, 171, 171);
+      }
+      .icon-handle .icon .tooltip {
+        position: absolute;
+        top: -20px;
+        background-color: #000;
+        padding: 5px 10px;
+        color: #e5e0e0;
+        font-weight: 400;
+        border-radius: 50px;
+        border-bottom-left-radius: 2px;
+        z-index: 18;
+        font-size: 10px;
+        opacity: 0;
+      }
     </style>
   </head>
   <body>
@@ -558,6 +685,70 @@
               <span class="option-text">Settings</span>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <!-- draggable 5th design -->
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 20vh;
+        "
+      >
+        <div class="menu" id="draggable-menu">
+          <div class="toggle"><ion-icon name="add-outline"></ion-icon></div>
+          <li style="--i: 0">
+            <a href="#"><ion-icon name="home-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 1">
+            <a href="#"><ion-icon name="person-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 2">
+            <a href="#"><ion-icon name="settings-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 3">
+            <a href="#"><ion-icon name="mail-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 4">
+            <a href="#"><ion-icon name="videocam-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 5">
+            <a href="#"><ion-icon name="call-outline"></ion-icon></a>
+          </li>
+          <li style="--i: 6">
+            <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+          </li>
+          <li style="--i: 7">
+            <a href="#"><ion-icon name="logo-google-playstore"></ion-icon></a>
+          </li>
+        </div>
+      </div>
+      <!-- Draggable 6th design -->
+      <div class="bottom-navbar" id="draggable-navbar">
+        <div class="icon-handle home">
+          <i class="fa-solid fa-house icon"
+            ><p class="tooltip home-tooltip">Home</p></i
+          >
+        </div>
+        <div class="icon-handle heart">
+          <i class="fa-solid fa-heart icon"
+            ><p class="tooltip heart-tooltip">Heart</p></i
+          >
+        </div>
+        <div class="bottom-top">
+          <div class="plus-wrapper"><i class="fa-solid fa-plus"></i></div>
+        </div>
+        <div class="icon-handle search">
+          <i class="fa-solid fa-magnifying-glass icon"
+            ><p class="tooltip search-tooltip">Search</p></i
+          >
+        </div>
+        <div class="icon-handle user">
+          <i class="fa-solid fa-user icon"
+            ><p class="tooltip user-tooltip">User</p></i
+          >
         </div>
       </div>
     </div>

@@ -216,3 +216,105 @@ document.addEventListener("DOMContentLoaded", () => {
     isDragging = false;
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  let toggle = document.querySelector(".toggle");
+  let menu = document.querySelector(".menu");
+
+  toggle.onclick = function () {
+    menu.classList.toggle("active");
+  };
+
+  const draggableMenu = document.getElementById("draggable-menu");
+  let isDragging = false;
+  let startX, startY, initialX, initialY;
+
+  draggableMenu.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    initialX = draggableMenu.offsetLeft;
+    initialY = draggableMenu.offsetTop;
+    draggableMenu.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      let dx = e.clientX - startX;
+      let dy = e.clientY - startY;
+      draggableMenu.style.left = `${initialX + dx}px`;
+      draggableMenu.style.top = `${initialY + dy}px`;
+    }
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    draggableMenu.style.cursor = "grab";
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const plusWrapper = document.querySelector(".plus-wrapper");
+  const icons = document.querySelectorAll(".icon-handle");
+  const tooltips = document.querySelectorAll(".tooltip");
+  const draggableNavbar = document.getElementById("draggable-navbar");
+
+  icons.forEach((icon) => {
+    icon.style.display = "none";
+  });
+
+  plusWrapper.addEventListener("click", function () {
+    const isVisible = icons[0].style.display === "flex";
+
+    icons.forEach((icon) => {
+      icon.style.display = isVisible ? "none" : "flex";
+    });
+
+    draggableNavbar.style.backgroundColor = isVisible ? "#fff" : "#e0e0e0"; // Change to your desired color
+  });
+
+  let isDragging = false;
+  let startX, startY, initialX, initialY;
+
+  draggableNavbar.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    initialX = draggableNavbar.offsetLeft;
+    initialY = draggableNavbar.offsetTop;
+    draggableNavbar.style.cursor = "grabbing";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+      let dx = e.clientX - startX;
+      let dy = e.clientY - startY;
+      draggableNavbar.style.left = `${initialX + dx}px`;
+      draggableNavbar.style.top = `${initialY + dy}px`;
+    }
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    draggableNavbar.style.cursor = "grab";
+  });
+
+  icons.forEach((icon) => {
+    const iconElement = icon.querySelector(".icon");
+    iconElement.addEventListener("click", function () {
+      tooltips.forEach((tooltip) => {
+        tooltip.style.opacity = 0;
+      });
+      icons.forEach((icon) => {
+        icon.querySelector(".icon").style.backgroundColor = "transparent";
+        icon.querySelector(".icon").style.color = "#000";
+      });
+      this.style.backgroundColor = "rgb(4,86,237)";
+      this.style.color = "#fff";
+      this.style.padding = "8px";
+
+      let tooltip = this.querySelector(".tooltip");
+      if (tooltip) {
+        tooltip.style.opacity = 0.55;
+      }
+    });
+  });
+});
